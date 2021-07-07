@@ -29,7 +29,7 @@ class FormTests(TestCase):
             follow=True
         )
         self.assertRedirects(response, reverse('index'))
-        self.assertEqual(Post.objects.count(), posts_count+1)
+        self.assertEqual(Post.objects.count(), posts_count + 1)
         self.assertTrue(Post.objects.filter(text='test-post',).exists())
 
     def test_edit_post(self):
@@ -54,5 +54,5 @@ class FormTests(TestCase):
             Post.objects.filter(
                 text='test-post-edit',
                 author=self.user,
-                ).exists()
+            ).exists()
         )

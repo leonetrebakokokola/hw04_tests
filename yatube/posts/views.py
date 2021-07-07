@@ -22,6 +22,7 @@ def index(request):
 
     return render(request, 'posts/index.html', context)
 
+
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     posts = Post.objects.filter(group=group).order_by("-pub_date")
@@ -94,7 +95,7 @@ def post_edit(request, username, post_id):
 
         if form.is_valid():
             form.save()
-            
+
             return redirect('post', username=username, post_id=post_id)
 
         context = {

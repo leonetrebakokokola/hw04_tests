@@ -44,7 +44,7 @@ class ViewTests(TestCase):
 
     def test_group_context(self):
         response = self.authorized_client.get(
-                reverse('group_posts', kwargs={'slug': self.group.slug}))
+            reverse('group_posts', kwargs={'slug': self.group.slug}))
         first_post = response.context['page'][0]
         self.assertEqual(first_post.text, 'test-post')
         self.assertEqual(response.context['group'].slug, 'test-slug')
