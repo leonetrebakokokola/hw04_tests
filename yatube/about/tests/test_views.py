@@ -24,5 +24,5 @@ class AboutViewsTests(TestCase):
         }
         for template, adress in templates_url_names.items():
             with self.subTest(adress=adress):
-                response = self.authorized_client.get(adress)
+                response = self.guest_client.get(adress)
                 self.assertTemplateUsed(response, template)
