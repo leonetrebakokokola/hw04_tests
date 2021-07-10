@@ -64,12 +64,12 @@ class URLTests(TestCase):
 
     def test_url_template(self):
         templates_url_names = {
-            'posts/index.html': '/',
-            'posts/group.html': '/group/test-slug/',
-            'posts/post_form.html': '/new/',
-            'posts/post_form.html': f'/test-user/{self.post.id}/edit/',
+            '/': 'posts/index.html',
+            '/group/test-slug/': 'posts/group.html',
+            '/new/': 'posts/post_form.html',
+            f'/test-user/{self.post.id}/edit/': 'posts/post_form.html',
         }
-        for template, adress in templates_url_names.items():
+        for adress, template in templates_url_names.items():
             with self.subTest(adress=adress):
                 response = self.authorized_client.get(adress)
                 self.assertTemplateUsed(response, template)
