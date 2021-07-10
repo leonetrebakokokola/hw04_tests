@@ -31,14 +31,13 @@ class URLTests(TestCase):
         adress_url_names = {
             '/',
             '/group/test-slug/',
-            '/new/',
             '/test-user/',
             f'/test-user/{self.post.id}/'
         }
         # Проверка всех страниц - если пользователь авторизован
         for adress in adress_url_names:
             with self.subTest(adress=adress):
-                response = self.authorized_client.get(adress)
+                response = self.guest_client.get(adress)
                 self.assertEqual(response.status_code, 200)
 
     def test_new_post_url_not_authorized(self):
@@ -67,8 +66,8 @@ class URLTests(TestCase):
         templates_url_names = {
             'posts/index.html': '/',
             'posts/group.html': '/group/test-slug/',
-            'posts/new_post.html': '/new/',
-            'posts/post_edit.html': f'/test-user/{self.post.id}/edit/',
+            'posts/post_form.html': '/new/',
+            'posts/post_form.html': f'/test-user/{self.post.id}/edit/',
         }
         for template, adress in templates_url_names.items():
             with self.subTest(adress=adress):

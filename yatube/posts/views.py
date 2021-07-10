@@ -70,6 +70,7 @@ def post_view(request, username, post_id):
 
 @login_required
 def new_post(request):
+    is_new = True
     if request.method == "POST":
         form = PostForm(request.POST)
         if form.is_valid():
@@ -81,9 +82,10 @@ def new_post(request):
 
     context = {
         "form": form,
+        "is_new": is_new,
     }
 
-    return render(request, "posts/new_post.html", context)
+    return render(request, "posts/post_form.html", context)
 
 
 @login_required
@@ -102,7 +104,7 @@ def post_edit(request, username, post_id):
             'form': form,
         }
 
-        return render(request, 'posts/post_edit.html', context)
+        return render(request, 'posts/post_form.html', context)
 
     else:
         return redirect('post', username=username, post_id=post_id)

@@ -30,7 +30,7 @@ class ViewTests(TestCase):
             'posts/group.html': (
                 reverse('group_posts', kwargs={'slug': self.group.slug})
             ),
-            'posts/new_post.html': reverse('new_post'),
+            'posts/post_form.html': reverse('new_post'),
         }
         for template, reverse_name in templates_pages_names.items():
             with self.subTest(reverse_name=reverse_name):
@@ -108,8 +108,7 @@ class ViewTests(TestCase):
     def test_post_not_another_group_page(self):
         response = self.authorized_client.get(
             reverse('group_posts', kwargs={'slug': self.groupTwo.slug}))
-        self.assertEqual(
-            str(response.context.get('page').object_list), '<QuerySet []>')
+        self.assertEqual(len(response.context.get('page')), 0)
 
 
 class PaginatorViewTests(TestCase):
